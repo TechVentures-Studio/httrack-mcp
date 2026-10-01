@@ -8,15 +8,5 @@
     "url": "https://github.com/TechVentures-Studio/httrack-mcp",
     "source": "github"
   },
-  "websiteUrl": "https://github.com/TechVentures-Studio/httrack-mcp",
-  "packages": [
-    {
-      "registryType": "oci",
-      "identifier": "ghcr.io/techventures-studio/httrack-mcp-server:v1.0.1",
-      "transport": {
-        "type": "streamable-http",
-        "url": "http://localhost:9050/mcp"
-      }
-    }
-  ]
+  "websiteUrl": "https://github.com/TechVentures-Studio/httrack-mcp"
 }
