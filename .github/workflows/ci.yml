@@ -1,0 +1,39 @@
+# CI: syntax check, Dockerfile sanity, and image build.
+# Copyright (C) 2026 Tech Ventures VCC
+# SPDX-License-Identifier: AGPL-3.0-or-later
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main, dev]
+
+jobs:
+  python-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Syntax check
+        run: python -m py_compile server.py && echo "server.py syntax OK"
+
+  dockerfile-sanity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assert Dockerfile structure
+        run: |
+          grep -q "FROM python:3.12-slim" Dockerfile
+          grep -q "COPY server.py /app/server.py" Dockerfile
+          grep -q fastmcp Dockerfile
+          grep -q httrack Dockerfile
+          echo "Dockerfile sanity OK"
+
+  docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t httrack-mcp:ci .

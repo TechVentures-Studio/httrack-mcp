@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# httrack working artifacts
+hts-cache/
+hts-log.txt
+
+# editors / OS
+.idea/
+.vscode/
+.DS_Store
