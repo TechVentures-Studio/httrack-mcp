@@ -26,9 +26,9 @@ jobs:
         id: ver
         run: echo "version=${{ inputs.version || github.ref_name }}" >> "$GITHUB_OUTPUT"
       - name: Build image
-        run: docker build -t ghcr.io/${{ github.repository_owner }}/httrack-mcp:${{ steps.ver.outputs.version }} -t ghcr.io/${{ github.repository_owner }}/httrack-mcp:latest .
+        run: docker build -t ghcr.io/techventures-studio/httrack-mcp:${{ steps.ver.outputs.version }} -t ghcr.io/techventures-studio/httrack-mcp:latest .
       - name: Push image
         run: |
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-          docker push ghcr.io/${{ github.repository_owner }}/httrack-mcp:${{ steps.ver.outputs.version }}
-          docker push ghcr.io/${{ github.repository_owner }}/httrack-mcp:latest
+          docker push ghcr.io/techventures-studio/httrack-mcp:${{ steps.ver.outputs.version }}
+          docker push ghcr.io/techventures-studio/httrack-mcp:latest
