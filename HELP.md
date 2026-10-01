@@ -15,7 +15,7 @@ Everything runs in one Docker container; downloads land in a single volume you c
 ```bash
 git clone https://github.com/TechVentures-Studio/httrack-mcp.git
 cd httrack-mcp
-docker build -t httrack-mcp .
+docker build -t httrack-mcp-server .
 ```
 
 ## 3. Run

@@ -32,7 +32,7 @@ the archive via `catalog`, `list_files`, `read_file`, and `search_files`.
 Prerequisites: Docker.
 
 ```bash
-docker build -t httrack-mcp .
+docker build -t httrack-mcp-server .
 
 docker run -d --name httrack-mcp --restart unless-stopped \
   -p 9050:8000 \

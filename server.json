@@ -12,7 +12,7 @@
   "packages": [
     {
       "registryType": "oci",
-      "identifier": "ghcr.io/techventures-studio/httrack-mcp:v1.0.1",
+      "identifier": "ghcr.io/techventures-studio/httrack-mcp-server:v1.0.1",
       "transport": {
         "type": "streamable-http",
         "url": "http://localhost:9050/mcp"
