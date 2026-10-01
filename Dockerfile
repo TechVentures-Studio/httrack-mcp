@@ -8,6 +8,7 @@
 FROM python:3.12-slim
 RUN apt-get update -qq && apt-get install -y -qq --no-install-recommends httrack && rm -rf /var/lib/apt/lists/*
 RUN pip install --no-cache-dir fastmcp
+LABEL io.modelcontextprotocol.server.name="io.github.TechVentures-Studio/httrack-mcp"
 COPY server.py /app/server.py
 WORKDIR /app
 CMD ["python", "server.py"]

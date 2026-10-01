@@ -1,0 +1,24 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.TechVentures-Studio/httrack-mcp",
+  "title": "HTTrack MCP Server",
+  "description": "AI-agent website mirroring and offline archive browsing: mirror entire websites with HTTrack as background jobs, then list, read and search the downloaded pages over MCP.",
+  "version": "1.0.1",
+  "repository": {
+    "url": "https://github.com/TechVentures-Studio/httrack-mcp",
+    "source": "github"
+  },
+  "websiteUrl": "https://github.com/TechVentures-Studio/httrack-mcp",
+  "packages": [
+    {
+      "registryType": "oci",
+      "identifier": "ghcr.io/techventures-studio/httrack-mcp:v1.0.1",
+      "version": "1.0.1",
+      "transport": {
+        "type": "streamable-http",
+        "url": "http://localhost:9050/mcp",
+        "description": "Run: docker run -p 9050:8000 ghcr.io/techventures-studio/httrack-mcp:v1.0.1 ; then connect to http://localhost:9050/mcp"
+      }
+    }
+  ]
+}
