@@ -1,23 +1,4 @@
 #!/usr/bin/env python3
-# HTTrack MCP Server — FastMCP wrapper around the HTTrack website copier.
-# Copyright (C) 2026 Tech Ventures VCC
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as published
-# by the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-#
-# Network server notice (AGPL section 13): if you run a modified version of
-# this server and users interact with it remotely, you must offer them the
-# corresponding source of that modified version.
 """HTTrack MCP server: mirror sites + browse/search downloaded archives.
 
 Runs inside a container with the Terramaster web archive mounted at /data
@@ -150,9 +131,11 @@ def mirror_site(
     depth: int = 3,
     max_rate: str = "500K",
     filters: list[str] | None = None,
+    proxy: str = "",
 ) -> dict:
     """Mirror a website into the archive (background job). Returns job_id + paths.
     depth = link depth (0..16); filters = optional HTTrack filter expressions (+/- patterns).
+    proxy = optional HTTP proxy, e.g. http://user:pass@host:9200 (rota rotation proxy).
     Concurrency: one active mirror per project — a second mirror_site() on the same
     project is rejected with a pointer to the running job; different projects run in parallel."""
     project = _safe_project(project)
@@ -184,7 +167,7 @@ def mirror_site(
         f"--depth={max(0, min(int(depth), 16))}",
         f"--max-rate={max_rate}",
         "--robots=0",
-    ] + list(filters or [])
+    ] + (["--proxy", proxy] if proxy else []) + list(filters or [])
     meta = {"job_id": job_id, "url": url, "started": time.strftime("%Y-%m-%d %H:%M:%S")}
     (dest / ".httrack-mcp.json").write_text(json.dumps(meta), "utf8")
     with open(log, "w") as lf:
